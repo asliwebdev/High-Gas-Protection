@@ -1,113 +1,268 @@
 import Image from "next/image";
+import Link from "next/link";
+import { FaFacebookF, FaYoutube } from "react-icons/fa";
+import { FaXTwitter, FaInstagram } from "react-icons/fa6";
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="z-10 w-full max-w-5xl items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          Get started by editing&nbsp;
-          <code className="font-mono font-bold">src/app/page.tsx</code>
+    <main className="min-h-screen bg-[#252525]">
+      <Navbar />
+      <Hero />
+      <Reception />
+      <Contacts />
+      <Footer />
+    </main>
+  );
+}
+
+function Navbar() {
+  return (
+    <nav className="fixed w-full top-0 z-10 p-4">
+      <div className="py-2 px-[2.6rem] container w-full lg:w-[90%] mx-auto flex justify-between items-center h-[90px] rounded-[100vw] bg-[#323232]">
+        <div className="flex gap-4 items-center">
+          <Image src="/logo.png" alt="logo" width={48} height={48} />
+          <span className="font-bold text-[22.4px]">HGP</span>
+        </div>
+        <ul className="flex items-center font-medium text-lg">
+          <li className="p-4 rounded-2xl hover:bg-[#252525] transition-colors duration-300">
+            <Link href="#reception">Reception</Link>
+          </li>
+          <li className="p-4 rounded-2xl hover:bg-[#252525] transition-colors duration-300">
+            <Link href="#contacts">Contacts</Link>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  );
+}
+
+function Hero() {
+  return (
+    <div className="pt-24 flex justify-center items-center max-sm:px-4">
+      <div className="max-w-[800px] py-6 lg:py-12">
+        <h1 className="text-center text-[clamp(2.25rem,5vw,4.5rem)]">
+          <strong>High Gas Protection</strong>
+        </h1>
+        <p className="text-center mt-8 max-w-2xl">
+          This is the project made by TUIT students group. This system allow you
+          to manage gas condition. If you want to get information about the
+          protector, please click the bottom below
         </p>
-        <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:size-auto lg:bg-none">
-          <a
-            className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+        <div className="flex justify-center mt-10">
+          <Link
+            href="/learn-more"
+            className="bg-[rgba(67,238,125,1)] rounded-[100px] py-5 px-8 text-black font-semibold text-[22.4px] hover:opacity-80 transition-all duration-300"
           >
-            By{" "}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className="dark:invert"
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
+            Learn more
+          </Link>
+        </div>
+        <div className="flex justify-center mt-16">
+          <Image
+            src="/hgp.jpg"
+            alt="hgp logo"
+            width={549}
+            height={500}
+            quality={100}
+            className="rounded-[2rem]"
+          />
         </div>
       </div>
+    </div>
+  );
+}
 
-      <div className="relative z-[-1] flex place-items-center before:absolute before:h-[300px] before:w-full before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-full after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-10 after:dark:from-sky-900 after:dark:via-[#0141ff] after:dark:opacity-40 sm:before:w-[480px] sm:after:w-[240px] before:lg:h-[360px]">
-        <Image
-          className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
+const receptions = [
+  {
+    index: "01",
+    title: "Register",
+    description: "You have to register before ordering and log in our system.",
+    link: "/registration",
+  },
+  {
+    index: "02",
+    title: "Order",
+    description: "After having registered, you can order gas detector.",
+    link: "/order",
+  },
+  {
+    index: "03",
+    title: "Login",
+    description:
+      "Once your order, you will be given login to access the system but you have to use your password!",
+    link: "/login",
+  },
+];
+
+function Reception() {
+  return (
+    <section id="reception" className="py-12 px-4">
+      <div className="container lg:w-[90%] mx-auto">
+        <h2 className="text-center text-[64px]">
+          <strong>Reception</strong>
+        </h2>
+        <ul className="mt-8 flex gap-6 flex-wrap tracking-tight items-stretch">
+          {receptions.map((reception) => {
+            const { index, title, description, link } = reception;
+            return (
+              <li
+                key={index}
+                className="bg-[#404040] rounded-[2rem] flex-1 flex flex-col flex-nowrap relative min-w-[320px]"
+              >
+                <div className="mt-8 p-[36px] pt-0 h-full flex flex-col flex-grow">
+                  <h5 className="text-[80px] leading-none text-[rgba(97,232,15,1)]">
+                    <strong>{index}</strong>
+                  </h5>
+                  <h4 className="mt-5 text-[32px]">
+                    <strong>{title}</strong>
+                  </h4>
+                  <p className="my-3 text-[22.4px]">{description}</p>
+                  <div className="mt-auto flex">
+                    <Link
+                      href={link}
+                      className="mt-4 bg-[rgba(67,238,125,1)] rounded-[100px] py-5 px-8 text-black font-semibold text-[22.4px] hover:opacity-80 transition-all duration-300"
+                    >
+                      {title}
+                    </Link>
+                  </div>
+                </div>
+              </li>
+            );
+          })}
+        </ul>
       </div>
+    </section>
+  );
+}
 
-      <div className="mb-32 grid text-center lg:mb-0 lg:w-full lg:max-w-5xl lg:grid-cols-4 lg:text-left">
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Docs{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-sm opacity-50">
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Learn{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-sm opacity-50">
-            Learn about Next.js in an interactive course with&nbsp;quizzes!
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Templates{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-sm opacity-50">
-            Explore starter templates for Next.js.
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Deploy{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-balance text-sm opacity-50">
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
+function Contacts() {
+  return (
+    <section id="contacts" className="py-12 px-4">
+      <div className="container lg:w-[90%] mx-auto">
+        <h2 className="text-center text-[64px]">
+          <strong>Contacts</strong>
+        </h2>
+        <div className="flex gap-6 mt-10">
+          <div className="p-[36px] bg-[#404040] rounded-[2rem] flex-1">
+            <h5 className="text-[32px] leading-[1.5] mb-3">
+              <strong>Get in touch</strong>
+            </h5>
+            <ul className="flex flex-col gap-2 text-[22.4px]">
+              <li>
+                Phone:{" "}
+                <Link
+                  href="tel:+998 71 238 64 15"
+                  className="text-[rgba(67,238,125,1)]"
+                >
+                  +998 71 238 64 15
+                </Link>
+              </li>
+              <li>
+                Whatsapp:{" "}
+                <Link
+                  href="https://wa.me/+998712386415"
+                  target="_blank"
+                  className="text-[rgba(67,238,125,1)]"
+                >
+                  +998 71 238 64 15
+                </Link>
+              </li>
+              <li>
+                Email:{" "}
+                <Link
+                  href="mailto:info@tuit.uz"
+                  className="text-[rgba(67,238,125,1)]"
+                >
+                  info@tuit.uz
+                </Link>
+              </li>
+            </ul>
+            <ul className="mt-10 text-[22.4px]">
+              <li>
+                <span>
+                  Address: <br />
+                </span>
+                Tashkent 100084, Amir Temur avenue 108
+              </li>
+              <li>
+                <span>
+                  Working hours: <br />
+                </span>
+                9:00AM - 6:00PM
+              </li>
+            </ul>
+          </div>
+          <div className="flex-[1.5]">
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d48025.8379813608!2d69.19522338136711!3d41.3391037924045!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38ae8b8a0bfe27d9%3A0x29bcda9dd27c336a!2sTATU!5e0!3m2!1sen!2s!4v1719681203682!5m2!1sen!2s"
+              className="h-full w-full rounded-[2rem]"
+              loading="lazy"
+            ></iframe>
+          </div>
+        </div>
       </div>
-    </main>
+    </section>
+  );
+}
+
+const socialLinks = [
+  {
+    index: 1,
+    url: "/",
+    icon: <FaFacebookF />,
+  },
+  {
+    index: 2,
+    url: "/",
+    icon: <FaXTwitter />,
+  },
+  {
+    index: 3,
+    url: "/",
+    icon: <FaInstagram />,
+  },
+  {
+    index: 4,
+    url: "/",
+    icon: <FaYoutube />,
+  },
+];
+
+function Footer() {
+  return (
+    <footer className="bg-[#323232] py-16 px-4 flex items-center justify-center">
+      <div className="flex flex-col gap-8">
+        <ul className="flex justify-center items-center font-medium text-[32px]">
+          <li className="p-4 rounded-2xl hover:bg-[#252525] transition-colors duration-300">
+            <Link href="#reception">Reception</Link>
+          </li>
+          <li className="p-4 rounded-2xl hover:bg-[#252525] transition-colors duration-300">
+            <Link href="#contacts">Contacts</Link>
+          </li>
+        </ul>
+        <ul className="flex justify-center gap-6">
+          {socialLinks.map((link) => {
+            return (
+              <li
+                key={link.index}
+                className="bg-[#252525] w-[72px] h-[72px] rounded-full hover:opacity-85 transition-all duration-300"
+              >
+                <Link
+                  href={link.url}
+                  target="_blank"
+                  className="w-full h-full flex items-center justify-center text-[32px]"
+                >
+                  {link.icon}
+                </Link>
+              </li>
+            );
+          })}
+        </ul>
+        <p className="text-[22.4px] mt-4 mb-7">
+          © Copyright {new Date().getFullYear()}{" "}
+          <span className="text-[rgba(67,238,125,1)]">HGP</span> - All Rights
+          Reserved
+        </p>
+      </div>
+    </footer>
   );
 }
