@@ -3,7 +3,7 @@ import Link from "next/link";
 import { FaFacebookF, FaYoutube } from "react-icons/fa";
 import { FaXTwitter, FaInstagram } from "react-icons/fa6";
 
-export default function Home() {
+export default function LandingPage() {
   return (
     <main className="min-h-screen bg-[#252525]">
       <Navbar />
@@ -23,7 +23,7 @@ function Navbar() {
           <Image src="/logo.png" alt="logo" width={48} height={48} />
           <span className="font-bold text-[22.4px]">HGP</span>
         </div>
-        <ul className="flex items-center font-medium text-lg">
+        <ul className="flex items-center font-medium text-[22.4px]">
           <li className="p-4 rounded-2xl hover:bg-[#252525] transition-colors duration-300">
             <Link href="#reception">Reception</Link>
           </li>
@@ -43,7 +43,7 @@ function Hero() {
         <h1 className="text-center text-[clamp(2.25rem,5vw,4.5rem)]">
           <strong>High Gas Protection</strong>
         </h1>
-        <p className="text-center mt-8 max-w-2xl">
+        <p className="text-center mt-5 max-w-3xl text-[22.4px]">
           This is the project made by TUIT students group. This system allow you
           to manage gas condition. If you want to get information about the
           protector, please click the bottom below
@@ -141,7 +141,7 @@ function Contacts() {
         <h2 className="text-center text-[64px]">
           <strong>Contacts</strong>
         </h2>
-        <div className="flex gap-6 mt-10">
+        <div className="flex flex-col lg:flex-row gap-6 mt-10">
           <div className="p-[36px] bg-[#404040] rounded-[2rem] flex-1">
             <h5 className="text-[32px] leading-[1.5] mb-3">
               <strong>Get in touch</strong>
@@ -191,10 +191,10 @@ function Contacts() {
               </li>
             </ul>
           </div>
-          <div className="flex-[1.5]">
+          <div className="flex-[1.5] min-h-[400px]">
             <iframe
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d48025.8379813608!2d69.19522338136711!3d41.3391037924045!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38ae8b8a0bfe27d9%3A0x29bcda9dd27c336a!2sTATU!5e0!3m2!1sen!2s!4v1719681203682!5m2!1sen!2s"
-              className="h-full w-full rounded-[2rem]"
+              className="h-full w-full rounded-[2rem] max-lg:h-[400px]"
               loading="lazy"
             ></iframe>
           </div>
@@ -239,7 +239,7 @@ function Footer() {
             <Link href="#contacts">Contacts</Link>
           </li>
         </ul>
-        <ul className="flex justify-center gap-6">
+        <ul className="flex flex-wrap justify-center gap-6">
           {socialLinks.map((link) => {
             return (
               <li
@@ -257,7 +257,7 @@ function Footer() {
             );
           })}
         </ul>
-        <p className="text-[22.4px] mt-4 mb-7">
+        <p className="text-[22.4px] mt-4 text-center">
           © Copyright {new Date().getFullYear()}{" "}
           <span className="text-[rgba(67,238,125,1)]">HGP</span> - All Rights
           Reserved
