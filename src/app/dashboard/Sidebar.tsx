@@ -36,7 +36,7 @@ const navLinks = [
 export default function Sidebar() {
   const pathname = usePathname();
   return (
-    <aside className="hidden h-screen w-[280px] p-4 md:flex flex-col justify-between border-r border-[rgba(255,255,255,0.1)]">
+    <aside className="hidden sticky top-0 left-0 h-screen w-[280px] p-4 md:flex flex-col justify-between border-r border-borderColor">
       <div className="flex flex-col gap-10">
         <div className="flex items-center gap-2">
           <div className="w-10 h-10 rounded-full flex items-center justify-center bg-[#494949]">
@@ -58,8 +58,7 @@ export default function Sidebar() {
               <li
                 key={index}
                 className={`mt-3 ${
-                  pathname === href &&
-                  "link-bg-gradient border-l border-[rgba(38,112,233,1)]"
+                  pathname === href && "link-bg-gradient border-l border-blue"
                 } px-5 py-2.5 text-lg font-medium hover-link-bg-gradient`}
               >
                 <Link href={href} className="flex gap-2">
@@ -71,7 +70,7 @@ export default function Sidebar() {
           })}
         </ul>
       </div>
-      <div className="pt-5 pb-3 border-t border-[rgba(255,255,255,0.1)] font-medium">
+      <div className="pt-5 pb-3 border-t border-borderColor font-medium">
         <Link
           href="/use-policy"
           className="flex items-center gap-2 px-5 py-2.5"

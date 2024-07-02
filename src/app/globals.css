@@ -36,3 +36,20 @@ body {
   box-shadow: 0px 3.75px 7.5px 0px rgba(0, 0, 0, 0.05);
   box-shadow: 0px 37.5px 75px 0px rgba(255, 255, 255, 0.15) inset;
 }
+
+.header-shadow {
+  box-shadow: 0px 7.5px 7.5px 0px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 3px 3px 0px rgba(0, 0, 0, 0.05);
+  box-shadow: 0px 0.75px 0px 0px rgba(0, 0, 0, 0.05);
+}
+
+.faq-answer {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease-out;
+}
+
+.faq-answer-open {
+  max-height: 500px;
+  transition: max-height 0.3s ease-in;
+}
