@@ -23,7 +23,7 @@ export default function Header() {
       <div
         className={`w-[300px] h-8 rounded-full py-2 px-4 ${
           isActive ? "bg-success" : "bg-danger"
-        } flex items-center justify-center text-black`}
+        } hidden md:flex items-center justify-center text-black`}
       >
         {isActive ? "On" : "Off"}
       </div>

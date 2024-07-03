@@ -88,7 +88,7 @@ export default function FAQs() {
                   faq.index === expandedIndex
                     ? "bg-blue"
                     : "bg-[rgba(21,35,41,1)]"
-                } px-6 py-5 text-xl rounded-tr-lg rounded-br-lg`}
+                } px-6 py-5 text-xl rounded-tr-lg rounded-br-lg transition-all duration-500`}
               >
                 {faq.index === expandedIndex ? <FaMinus /> : <FaPlus />}
               </button>
