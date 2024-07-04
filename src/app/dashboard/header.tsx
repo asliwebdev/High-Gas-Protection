@@ -3,15 +3,22 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
+import { SlMenu } from "react-icons/sl";
 
-export default function Header() {
+export default function Header({
+  toggleSidebar,
+}: {
+  toggleSidebar: () => void;
+}) {
   const [isActive, setIsActive] = useState(false);
 
   return (
     <header className="flex items-center justify-between header-shadow">
       <button
         type="button"
-        className={`w-16 h-8 border-2 rounded-full border-borderColor flex items-center transition-all duration-300 bg-[rgba(0,0,0,0.6)]`}
+        className={`w-16 h-8 border-2 rounded-full border-borderColor flex items-center transition-all duration-300  ${
+          isActive ? "bg-[rgba(255,255,255,0.6)]" : "bg-[rgba(0,0,0,0.6)]"
+        }`}
         onClick={() => setIsActive(!isActive)}
       >
         <span
@@ -20,22 +27,27 @@ export default function Header() {
           } rounded-full w-7 h-7 block`}
         ></span>
       </button>
-      <div
-        className={`w-[300px] h-8 rounded-full py-2 px-4 ${
-          isActive ? "bg-success" : "bg-danger"
-        } hidden md:flex items-center justify-center text-black`}
-      >
-        {isActive ? "On" : "Off"}
+      <div className="w-[300px] h-8 rounded-full py-2 px-4 bg-success hidden md:flex items-center justify-center text-black">
+        On
       </div>
-      <Link href="/dashboard/profile">
-        <Image
-          src="/avatar.svg"
-          alt="avatar image"
-          width={35}
-          height={35}
-          className="rounded-full"
-        />
-      </Link>
+      <div className="flex gap-5 items-center">
+        <button
+          type="button"
+          className="text-xl block md:hidden"
+          onClick={toggleSidebar}
+        >
+          <SlMenu />
+        </button>
+        <Link href="/dashboard/profile">
+          <Image
+            src="/avatar.svg"
+            alt="avatar image"
+            width={35}
+            height={35}
+            className="rounded-full"
+          />
+        </Link>
+      </div>
     </header>
   );
 }

@@ -4,6 +4,7 @@ import Link from "next/link";
 import { BiSolidPhoneCall } from "react-icons/bi";
 import { MdMail } from "react-icons/md";
 import { FaLocationDot } from "react-icons/fa6";
+import FormInput from "@/components/FormInput";
 
 export const metadata: Metadata = {
   title: "Contact",
@@ -98,51 +99,5 @@ function ContactForm() {
         </button>
       </div>
     </form>
-  );
-}
-
-function FormInput({
-  type,
-  placeholder,
-  label,
-  minLength,
-  textarea,
-}: {
-  type?: string;
-  placeholder?: string;
-  label: string;
-  minLength?: number;
-  textarea?: boolean;
-}) {
-  const inputProps: { [key: string]: any } = {
-    className:
-      "block w-full py-[9px] text-sm placeholder:text-[rgba(201,201,201,1)] bg-transparent border-b outline-none",
-    id: type,
-    type: type,
-    name: type,
-    placeholder: placeholder,
-    required: true,
-    minLength: minLength || 0,
-  };
-
-  if (type === "tel") {
-    inputProps.pattern = "[0-9]{9}";
-  }
-
-  return (
-    <div className={`w-full ${!textarea && "lg:w-1/2"} flex flex-col gap-y-2`}>
-      <label htmlFor={type}>{label}</label>
-      {textarea ? (
-        <textarea
-          name="message"
-          className="focus:outline-none placeholder:text-[rgba(201,201,201,1)] bg-transparent border-b py-2.5 placeholder:font-medium"
-          placeholder="Write your message..."
-          required
-          rows={4}
-        />
-      ) : (
-        <input {...inputProps} />
-      )}
-    </div>
   );
 }
