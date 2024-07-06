@@ -67,11 +67,13 @@ function ContactForm() {
       <div className="flex flex-col sm:flex-row gap-x-10 gap-y-5 w-full">
         <FormInput
           type="text"
+          name="firstname"
           placeholder="Enter your first name"
           label="First Name"
         />
         <FormInput
           type="text"
+          name="lastname"
           placeholder="Enter your last name"
           label="Last Name"
         />
@@ -79,17 +81,19 @@ function ContactForm() {
       <div className="flex flex-col sm:flex-row gap-x-10 gap-y-5 w-full my-8">
         <FormInput
           type="email"
+          name="email"
           placeholder="something@gmail.com"
           label="Email"
         />
         <FormInput
           type="tel"
+          name="phoneNumber"
           placeholder="+998 99 123 45 67"
           label="Phone Number"
           minLength={9}
         />
       </div>
-      <FormInput textarea label="Message" />
+      <FormInput name="message" textarea label="Message" />
       <div className="flex justify-center items-center mt-8">
         <button
           type="submit"
