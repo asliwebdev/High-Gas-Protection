@@ -69,7 +69,7 @@ function Statistics() {
           return (
             <li
               key={index}
-              className="bg-[rgba(255,255,255,0.3)] rounded-xl py-[5px] px-10 flex flex-col items-center"
+              className="bg-[rgba(255,255,255,0.3)] rounded-xl py-[5px] px-10 flex flex-1 flex-col items-center"
             >
               <p className="mb-4">{stat.title}</p>
               <span className="text-[rgba(166,166,166,1)]">{stat.value}</span>
@@ -88,7 +88,7 @@ function Emergencies() {
         return (
           <li
             key={index}
-            className="bg-[rgba(157,213,244,1)] rounded-lg py-[5px] px-2.5 flex flex-col items-center"
+            className="bg-[rgba(157,213,244,1)] rounded-lg py-[5px] px-2.5 flex max-sm:flex-1 flex-col items-center"
           >
             <p className="text-black mb-4">{emergency.title}</p>
             <span className="text-[rgba(0,102,29,1)]">{emergency.number}</span>

@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { FaFacebookF, FaYoutube } from "react-icons/fa";
 import { FaXTwitter, FaInstagram } from "react-icons/fa6";
+import Navbar from "./Navbar";
 
 export default function LandingPage() {
   return (
@@ -12,27 +13,6 @@ export default function LandingPage() {
       <Contacts />
       <Footer />
     </main>
-  );
-}
-
-function Navbar() {
-  return (
-    <nav className="fixed w-full top-0 z-10 p-4">
-      <div className="py-2 px-[2.6rem] container w-full lg:w-[90%] mx-auto flex justify-between items-center h-[90px] rounded-[100vw] bg-[#323232]">
-        <div className="flex gap-4 items-center">
-          <Image src="/logo.png" alt="logo" width={48} height={48} />
-          <span className="font-bold text-[22.4px]">HGP</span>
-        </div>
-        <ul className="flex items-center font-medium text-[22.4px]">
-          <li className="p-4 rounded-2xl hover:bg-[#252525] transition-colors duration-300">
-            <Link href="#reception">Reception</Link>
-          </li>
-          <li className="p-4 rounded-2xl hover:bg-[#252525] transition-colors duration-300">
-            <Link href="#contacts">Contacts</Link>
-          </li>
-        </ul>
-      </div>
-    </nav>
   );
 }
 
@@ -95,9 +75,9 @@ const receptions = [
 
 function Reception() {
   return (
-    <section id="reception" className="py-12 px-4">
+    <section id="reception" className="py-6 lg:py-12 px-4">
       <div className="container lg:w-[90%] mx-auto">
-        <h2 className="text-center text-[64px]">
+        <h2 className="text-center text-5xl lg:text-[64px]">
           <strong>Reception</strong>
         </h2>
         <ul className="mt-8 flex gap-6 flex-wrap tracking-tight items-stretch">
@@ -108,14 +88,14 @@ function Reception() {
                 key={index}
                 className="bg-[#404040] rounded-[2rem] flex-1 flex flex-col flex-nowrap relative min-w-[320px]"
               >
-                <div className="mt-8 p-[36px] pt-0 h-full flex flex-col flex-grow">
-                  <h5 className="text-[80px] leading-none text-[rgba(97,232,15,1)]">
+                <div className="mt-6 md:mt-8 px-6 pb-6 md:p-[36px] md:pt-0 h-full flex flex-col flex-grow">
+                  <h5 className="text-[64px] md:text-[80px] leading-none text-[rgba(97,232,15,1)]">
                     <strong>{index}</strong>
                   </h5>
-                  <h4 className="mt-5 text-[32px]">
+                  <h4 className="mt-3 md:mt-5 text-[32px]">
                     <strong>{title}</strong>
                   </h4>
-                  <p className="my-3 text-[22.4px]">{description}</p>
+                  <p className="my-2 md:my-3 text-[22.4px]">{description}</p>
                   <div className="mt-auto flex">
                     <Link
                       href={link}
@@ -136,9 +116,9 @@ function Reception() {
 
 function Contacts() {
   return (
-    <section id="contacts" className="py-12 px-4">
+    <section id="contacts" className="py-6 lg:py-12 px-4">
       <div className="container lg:w-[90%] mx-auto">
-        <h2 className="text-center text-[64px]">
+        <h2 className="text-center text-5xl lg:text-[64px]">
           <strong>Contacts</strong>
         </h2>
         <div className="flex flex-col lg:flex-row gap-6 mt-10">
@@ -229,7 +209,7 @@ const socialLinks = [
 
 function Footer() {
   return (
-    <footer className="bg-[#323232] py-16 px-4 flex items-center justify-center">
+    <footer className="bg-[#323232] py-8 lg:py-16 px-4 flex items-center justify-center">
       <div className="flex flex-col gap-8">
         <ul className="flex justify-center items-center font-medium text-[32px]">
           <li className="p-4 rounded-2xl hover:bg-[#252525] transition-colors duration-300">

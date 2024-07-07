@@ -65,8 +65,8 @@ export default function FAQs() {
   };
 
   return (
-    <main className="h-full bg-secondaryBg rounded-xl py-14 px-8">
-      <h1 className="text-4xl leading-[33.6px] tracking-[2.64px] uppercase mb-8">
+    <main className="h-full bg-secondaryBg rounded-xl px-6 py-7 lg:py-14 lg:px-8">
+      <h1 className="text-2xl md:text-4xl leading-[33.6px] tracking-[2.64px] uppercase mb-8">
         <strong>
           Frequently Asked <span className="text-blue">Questions</span>
         </strong>
@@ -75,10 +75,10 @@ export default function FAQs() {
         {faqs.map((faq) => (
           <div
             key={faq.index}
-            className="mb-4 border-2 border-[rgba(21,35,41,1)] rounded-lg pl-10"
+            className="mb-4 border-2 border-[rgba(21,35,41,1)] rounded-lg pl-4 lg:pl-10"
           >
-            <div className="font-bold cursor-pointer list-none flex justify-between items-center">
-              <span className="flex gap-3">
+            <div className="font-bold cursor-pointer list-none flex justify-between gap-0.5 items-center">
+              <span className="flex gap-3 py-2">
                 <span>{faq.index}.</span> {faq.question}
               </span>
               <button
