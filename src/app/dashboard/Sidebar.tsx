@@ -2,10 +2,12 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { FaRegQuestionCircle } from "react-icons/fa";
 import { BiLogOut } from "react-icons/bi";
 import { LiaTimesSolid } from "react-icons/lia";
+import { deleteCookie } from "@/lib/actions";
+import { toast } from "sonner";
 
 const navLinks = [
   {
@@ -42,6 +44,16 @@ export default function Sidebar({
   toggleSidebar: () => void;
 }) {
   const pathname = usePathname();
+  const router = useRouter();
+
+  async function logOut() {
+    const response = await deleteCookie();
+    if (response.message) {
+      toast.success(`${response.message}`);
+      router.push("/");
+    }
+  }
+
   return (
     <aside
       className={`${
@@ -98,7 +110,11 @@ export default function Sidebar({
           <FaRegQuestionCircle />
           <span>Using Policy</span>
         </Link>
-        <button type="button" className="flex items-center gap-2 px-5 py-2.5">
+        <button
+          type="button"
+          className="flex items-center gap-2 px-5 py-2.5"
+          onClick={logOut}
+        >
           <BiLogOut /> Log out
         </button>
       </div>

@@ -1,14 +1,8 @@
 "use server";
 
 import { cookies } from "next/headers";
-import { redirect } from "next/navigation";
 
-export type State = {
-  error?: string;
-  message?: string;
-};
-
-const baseUrl = "https://315b-195-158-2-216.ngrok-free.app";
+const baseUrl = "https://1a8a-195-158-2-216.ngrok-free.app";
 
 export async function registerUser(formData: FormData) {
   const data = {
@@ -87,11 +81,63 @@ export async function login(formData: FormData) {
       return { error: "Failed to login user!" };
     }
     const responseData = await response.json();
-    cookies().set("hgpToken", responseData?.token);
+
+    const cookieStore = cookies();
+    cookieStore.set({
+      name: "hgpToken",
+      value: responseData?.token,
+      path: "/",
+      httpOnly: true,
+      sameSite: "strict",
+    });
     return {
       message: "Successfully logged in!",
     };
   } catch (error) {
     return { error: "Failed to login user!" };
+  }
+}
+
+export async function sendMessage(formData: FormData) {
+  const data = {
+    firstname: formData.get("firstname"),
+    lastname: formData.get("lastname"),
+    email: formData.get("email"),
+    phoneNumber: formData.get("phoneNumber"),
+    message: formData.get("message"),
+  };
+
+  const token = cookies().get("hgpToken")?.value;
+  if (!token) {
+    return { error: "Token not found." };
+  }
+
+  try {
+    const response = await fetch(`${baseUrl}/api/contact/send/message`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(data),
+    });
+
+    if (!response.ok) {
+      return { error: "Failed to send your message!" };
+    }
+    return {
+      message: "Your message successfully sent. We'll contact back soon!",
+    };
+  } catch (error) {
+    return { error: "Failed to send your message!" };
+  }
+}
+
+export async function deleteCookie() {
+  try {
+    cookies().delete("hgpToken");
+    return { message: "You are logging out..." };
+  } catch (error) {
+    return { error: "Something went wrong" };
   }
 }
