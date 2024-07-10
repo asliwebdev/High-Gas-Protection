@@ -1,13 +1,17 @@
 import type { Metadata } from "next";
 
+import { getUserProfile } from "@/lib/data";
+import ProfileInfos from "./ProfileInfos";
+
 export const metadata: Metadata = {
   title: "Profile",
 };
 
-export default function Profile() {
+export default async function Profile() {
+  const profileData = await getUserProfile();
   return (
     <main className="h-full flex items-center justify-center">
-      <h1 className="text-6xl">Welcome To The Profile Page! </h1>
+      <ProfileInfos profileData={profileData} />
     </main>
   );
 }

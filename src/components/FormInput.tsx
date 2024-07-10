@@ -1,3 +1,8 @@
+"use client";
+
+import { useState } from "react";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
+
 type InputTypes = {
   type?: string;
   name: string;
@@ -17,10 +22,16 @@ export default function FormInput({
   textarea,
   width,
 }: InputTypes) {
+  const [showPassword, setShowPassword] = useState(false);
+
+  const togglePasswordVisibility = () => {
+    setShowPassword((prev) => !prev);
+  };
+
   const inputProps: { [key: string]: any } = {
     className:
       "block w-full py-[9px] placeholder:text-[rgba(201,201,201,1)] bg-transparent border-b outline-none",
-    type,
+    type: showPassword && type === "password" ? "text" : type,
     name,
     id: name,
     placeholder,
@@ -36,12 +47,12 @@ export default function FormInput({
     <div
       className={`w-full ${
         !textarea && !width && "lg:w-1/2"
-      } flex flex-col gap-y-1`}
+      } flex flex-col gap-y-1 relative`}
     >
       <label htmlFor={name}>{label}</label>
       {textarea ? (
         <textarea
-          name="message"
+          name={name}
           id={name}
           className="focus:outline-none placeholder:text-[rgba(201,201,201,1)] bg-transparent border-b py-2.5 placeholder:font-medium"
           placeholder="Write your message..."
@@ -49,7 +60,17 @@ export default function FormInput({
           rows={4}
         />
       ) : (
-        <input {...inputProps} />
+        <div className="relative">
+          <input {...inputProps} />
+          {type === "password" && (
+            <span
+              className="absolute right-2 top-1/2 transform -translate-y-1/2 cursor-pointer"
+              onClick={togglePasswordVisibility}
+            >
+              {showPassword ? <FaEyeSlash /> : <FaEye />}
+            </span>
+          )}
+        </div>
       )}
     </div>
   );

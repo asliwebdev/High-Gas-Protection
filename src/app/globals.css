@@ -70,3 +70,8 @@ body {
   opacity: 1;
   pointer-events: auto;
 }
+
+/* Add this to your CSS file or inline styles */
+.shadow-blue {
+  box-shadow: 0 0 20px 10px rgba(38, 112, 233, 0.5);
+}

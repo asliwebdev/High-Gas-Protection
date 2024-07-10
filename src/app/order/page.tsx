@@ -19,7 +19,7 @@ export default function Order() {
       toast.success("Login sent to your email. Please check it!");
       setTimeout(() => {
         router.push("/login");
-      }, 2000);
+      }, 1000);
     }
   }
 
@@ -65,7 +65,7 @@ export default function Order() {
         {/* <p aria-live="polite" role="status" className="text-danger">
           {state?.message}
         </p> */}
-        <SubmitButton text="Order" />
+        <SubmitButton text="Order" cancel />
         <p className="mt-6 text-center">
           No account yet?{" "}
           <Link href="/registration" className="text-blue ml-3 hover:underline">

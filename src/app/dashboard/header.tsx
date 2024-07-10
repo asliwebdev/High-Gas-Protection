@@ -4,7 +4,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import { SlMenu } from "react-icons/sl";
-import { BsPersonCircle } from "react-icons/bs";
 
 export default function Header({
   toggleSidebar,
@@ -40,14 +39,13 @@ export default function Header({
           <SlMenu />
         </button>
         <Link href="/dashboard/profile">
-          {/* <Image
-            src="/avatar.svg"
+          <Image
+            src="/profile_img.webp"
             alt="avatar image"
             width={35}
             height={35}
             className="rounded-full"
-          /> */}
-          <BsPersonCircle className="w-8 h-8" />
+          />
         </Link>
       </div>
     </header>

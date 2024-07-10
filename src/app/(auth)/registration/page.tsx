@@ -20,7 +20,7 @@ export default function Register() {
       toast.success("Verification link sent to your email. Please check it!");
       setTimeout(() => {
         router.push("/order");
-      }, 2000);
+      }, 1000);
     }
   }
 
@@ -91,7 +91,7 @@ export default function Register() {
         {/* <p aria-live="polite" role="status" className="text-danger">
           {state?.message}
         </p> */}
-        <SubmitButton text="Register" />
+        <SubmitButton text="Register" cancel />
         <p className="mt-6 text-center">
           Already have an account?{" "}
           <Link href="/login" className="text-blue ml-3 hover:underline">

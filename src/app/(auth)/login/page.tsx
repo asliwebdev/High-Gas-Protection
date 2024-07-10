@@ -19,7 +19,7 @@ export default function Login() {
       toast.success("Successfully logged in!");
       setTimeout(() => {
         router.push("/dashboard");
-      }, 2000);
+      }, 1000);
     }
   }
 
@@ -56,7 +56,7 @@ export default function Login() {
         {/* <p aria-live="polite" role="status" className="text-danger">
           {state?.message}
         </p> */}
-        <SubmitButton text="Login" />
+        <SubmitButton text="Login" cancel />
         <p className="mt-6 text-center">
           No account yet?{" "}
           <Link href="/registration" className="text-blue ml-3 hover:underline">
