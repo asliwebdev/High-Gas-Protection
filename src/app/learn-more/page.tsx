@@ -24,7 +24,7 @@ export default function LearnMore() {
           of the hard work and collaboration of nearly 10 talented individuals
           who are passionate about making a positive impact. The device was
           designed and brought to fruition in less than six months, showcasing
-          our team's commitment and efficiency.
+          our team&apos;s commitment and efficiency.
           <span className="block mt-5">
             The primary objective of developing the HGP gas sensor is to
             safeguard human lives. Our device is specifically designed to
