@@ -6,7 +6,7 @@ import Navbar from "./Navbar";
 
 export default function LandingPage() {
   return (
-    <main className="min-h-screen bg-[#252525]">
+    <main className="min-h-screen bg-[rgba(8,8,8,1)] shadows">
       <Navbar />
       <Hero />
       <Reception />
