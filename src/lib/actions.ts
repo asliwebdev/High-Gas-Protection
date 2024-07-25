@@ -1,8 +1,10 @@
 "use server";
 
 import { cookies } from "next/headers";
+import { getUserProfile } from "./data";
+import { revalidateTag } from "next/cache";
 
-const baseUrl = "https://1a8a-195-158-2-216.ngrok-free.app";
+const baseUrl = "https://amused-bison-equipped.ngrok-free.app";
 
 export async function registerUser(formData: FormData) {
   const data = {
@@ -13,6 +15,7 @@ export async function registerUser(formData: FormData) {
     address: formData.get("address"),
     password: formData.get("password"),
     passportSerialNumber: formData.get("passportSerialNumber"),
+    gender: formData.get("gender")?.toString().toUpperCase(),
   };
 
   try {
@@ -99,12 +102,11 @@ export async function login(formData: FormData) {
 }
 
 export async function sendMessage(formData: FormData) {
+  const userData = await getUserProfile();
   const data = {
-    firstname: formData.get("firstname"),
-    lastname: formData.get("lastname"),
-    email: formData.get("email"),
-    phoneNumber: formData.get("phoneNumber"),
+    title: formData.get("title"),
     message: formData.get("message"),
+    email: userData?.email,
   };
 
   const token = cookies().get("hgpToken")?.value;
@@ -140,4 +142,38 @@ export async function deleteCookie() {
   } catch (error) {
     return { error: "Something went wrong" };
   }
+}
+
+export async function UploadImage(formData: FormData) {
+  const userData = await getUserProfile();
+
+  const token = cookies().get("hgpToken")?.value;
+  if (!token) {
+    return { error: "Token not found." };
+  }
+
+  try {
+    const response = await fetch(
+      `${baseUrl}/api/uploadImage?userId=${userData.id}`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({ file: formData.get("file") }),
+      }
+    );
+
+    if (!response.ok) {
+      return { error: "Failed to upload the new image!" };
+    }
+    // return {
+    //   message: "Image updated successfully!",
+    // };
+  } catch (error) {
+    return { error: "Failed to upload the new image!" };
+  }
+  console.log("revalidating profile data");
+  revalidateTag("userProfile");
 }

@@ -1,6 +1,6 @@
 import { cookies } from "next/headers";
 
-const baseUrl = "https://1a8a-195-158-2-216.ngrok-free.app";
+const baseUrl = "https://amused-bison-equipped.ngrok-free.app";
 
 export async function getUserProfile() {
   const token = cookies().get("hgpToken")?.value;

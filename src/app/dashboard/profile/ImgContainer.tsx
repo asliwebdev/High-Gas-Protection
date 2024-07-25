@@ -1,12 +1,13 @@
 "use client";
 
+import { UploadImage } from "@/lib/actions";
 import { useState } from "react";
 import { BsCameraFill } from "react-icons/bs";
 
-export default function ImgContainer() {
-  const [profileImage, setProfileImage] = useState("/profile_img.webp");
+export default function ImgContainer({ imgUrl }: { imgUrl: string }) {
+  const [profileImage, setProfileImage] = useState(imgUrl);
 
-  const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  async function handleImageChange(event: React.ChangeEvent<HTMLInputElement>) {
     const file = event.target.files?.[0];
     if (file) {
       const reader = new FileReader();
@@ -16,8 +17,14 @@ export default function ImgContainer() {
         }
       };
       reader.readAsDataURL(file);
+      const formData = new FormData();
+      formData.append("file", file);
+      const message = await UploadImage(formData);
+      console.log(message);
     }
-  };
+  }
+
+  console.log(imgUrl);
 
   return (
     <div className="relative cursor-pointer w-[250px] h-[250px] group shrink-0">
