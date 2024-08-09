@@ -6,13 +6,19 @@ import { useFormStatus } from "react-dom";
 export function SubmitButton({
   text,
   cancel,
+  margin,
 }: {
   text: string;
   cancel?: boolean;
+  margin?: string;
 }) {
   const { pending } = useFormStatus();
   return (
-    <div className="flex flex-col justify-center items-center sm:flex-row gap-x-10 gap-y-5 mt-8">
+    <div
+      className={`flex flex-col justify-center items-center sm:flex-row gap-x-10 gap-y-5 ${
+        margin ? margin : "mt-8"
+      }`}
+    >
       {cancel && (
         <Link href="/" aria-disabled={pending} className="bg-[#ff4c4c] btn">
           Cancel

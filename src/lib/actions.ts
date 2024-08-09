@@ -145,35 +145,79 @@ export async function deleteCookie() {
 }
 
 export async function UploadImage(formData: FormData) {
-  const userData = await getUserProfile();
-
   const token = cookies().get("hgpToken")?.value;
   if (!token) {
     return { error: "Token not found." };
   }
 
   try {
-    const response = await fetch(
-      `${baseUrl}/api/uploadImage?userId=${userData.id}`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({ file: formData.get("file") }),
-      }
-    );
+    const response = await fetch(`${baseUrl}/api/uploadImage`, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      body: formData,
+    });
 
     if (!response.ok) {
       return { error: "Failed to upload the new image!" };
     }
-    // return {
-    //   message: "Image updated successfully!",
-    // };
   } catch (error) {
     return { error: "Failed to upload the new image!" };
   }
-  console.log("revalidating profile data");
   revalidateTag("userProfile");
+}
+
+export async function updateProfile(formData: FormData) {
+  const userData = await getUserProfile();
+  const token = cookies().get("hgpToken")?.value;
+  const data = {
+    email: formData.get("email"),
+    phone: formData.get("phone"),
+    address: formData.get("address"),
+  };
+
+  if (!token) {
+    return { error: "Token not found." };
+  }
+
+  try {
+    const response = await fetch(`${baseUrl}/api/edit/${userData.id}`, {
+      method: "PUT",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(data),
+    });
+
+    if (!response.ok) {
+      return { error: "Failed to edit the user info!" };
+    }
+  } catch (error) {
+    return { error: "Failed to edit the user info!" };
+  }
+  revalidateTag("userProfile");
+  return {
+    message: "Profile infos updated successfully!",
+  };
+}
+
+export async function updatePassword(formData: FormData) {
+  const data = {
+    email: formData.get("email"),
+    newPass: formData.get("newPass"),
+  };
+  try {
+    const response = await fetch(`${baseUrl}/api/reset-pass`, {
+      method: "POST",
+      body: JSON.stringify(data),
+    });
+
+    if (!response.ok) {
+      return { error: "Failed to reset the password!" };
+    }
+    return { message: "Password reset successfully!" };
+  } catch (error) {
+    return { error: "Failed to reset the password!" };
+  }
 }

@@ -2,6 +2,9 @@
 
 import { useState } from "react";
 import ImgContainer from "./ImgContainer";
+import { updateProfile } from "@/lib/actions";
+import { toast } from "sonner";
+import { SubmitButton } from "@/components/SubmitButton";
 
 type UserType = {
   id: number;
@@ -12,7 +15,7 @@ type UserType = {
   passportSerialNumber: string;
   phone: string;
   gender: "MALE" | "FEMALE";
-  imgUrl: string;
+  imageUrl: string;
 };
 
 export default function ProfileInfos({
@@ -34,22 +37,21 @@ export default function ProfileInfos({
     }));
   };
 
-  const handleEditing = () => {
-    if (!isEditing) {
-      setIsEditing(true);
+  async function clientAction(formData: FormData) {
+    const response = await updateProfile(formData);
+    if (response.error) {
+      toast.error(`${response.error}`);
     } else {
-      // Send changes to the backend
-      setIsEditing(false);
+      toast.success(`${response?.message || "Message successfully sent!"}`);
     }
-  };
-
-  console.log(initialProfileData.imgUrl);
+  }
 
   return (
     <section className="w-full flex flex-col gap-8 items-center lg:flex-row justify-center lg:items-start lg:gap-10 xl:gap-20 pb-12">
       <div className="p-6 rounded-2xl w-full flex-[2] bg-[#252525] flex flex-col items-center justify-center">
         <ImgContainer
-          imgUrl={initialProfileData.imgUrl || "/profile_img.webp"}
+          imgUrl={initialProfileData.imageUrl}
+          userId={initialProfileData.id}
         />
         <h1 className="text-4xl font-semibold mt-6 text-center">
           {profileData.firstname}{" "}
@@ -59,7 +61,10 @@ export default function ProfileInfos({
           {profileData.email}
         </p>
       </div>
-      <div className="w-full flex-[3] bg-[#252525] rounded-2xl p-4 lg:p-6">
+      <form
+        action={clientAction}
+        className="w-full flex-[3] bg-[#252525] rounded-2xl p-4 lg:p-6"
+      >
         <div className="space-y-4">
           {Object.keys(profileData)
             .filter((key) => key !== "id" && key !== "imageUrl")
@@ -91,23 +96,26 @@ export default function ProfileInfos({
         </div>
         <div className="flex gap-6 lg:gap-12 mt-4 justify-center">
           {isEditing && (
-            <button
-              type="button"
-              className={`${btnClasses} bg-danger`}
-              onClick={() => setIsEditing(false)}
-            >
-              Cancel
-            </button>
+            <>
+              <button
+                type="button"
+                className={`${btnClasses} bg-danger`}
+                onClick={() => setIsEditing(false)}
+              >
+                Back
+              </button>
+              <SubmitButton text="Save Changes" margin="m-0" />
+            </>
           )}
           <button
             type="button"
-            className={`${btnClasses} bg-blue`}
-            onClick={handleEditing}
+            className={`${btnClasses} bg-blue ${isEditing && "hidden"}`}
+            onClick={() => setIsEditing(true)}
           >
-            {isEditing ? "Save changes" : "Edit"}
+            Edit
           </button>
         </div>
-      </div>
+      </form>
     </section>
   );
 }

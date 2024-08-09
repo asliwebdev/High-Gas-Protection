@@ -1,11 +1,35 @@
 "use client";
 
 import { UploadImage } from "@/lib/actions";
-import { useState } from "react";
+import { fetchProfileImage } from "@/lib/data";
+import { useState, useEffect } from "react";
 import { BsCameraFill } from "react-icons/bs";
 
-export default function ImgContainer({ imgUrl }: { imgUrl: string }) {
-  const [profileImage, setProfileImage] = useState(imgUrl);
+export default function ImgContainer({
+  imgUrl,
+  userId,
+}: {
+  imgUrl: string;
+  userId: number;
+}) {
+  const [profileImage, setProfileImage] = useState(
+    imgUrl || "/profile_img.webp"
+  );
+
+  useEffect(() => {
+    async function getImage() {
+      const imageUrl = await fetchProfileImage(imgUrl);
+      if (imageUrl) {
+        setProfileImage(imageUrl);
+        console.log("imageUrl", imageUrl);
+        localStorage.setItem("profileImage", imageUrl);
+        window.dispatchEvent(new Event("profileImageUpdated"));
+      }
+    }
+    if (imgUrl) {
+      getImage();
+    }
+  }, [imgUrl, profileImage]);
 
   async function handleImageChange(event: React.ChangeEvent<HTMLInputElement>) {
     const file = event.target.files?.[0];
@@ -19,12 +43,10 @@ export default function ImgContainer({ imgUrl }: { imgUrl: string }) {
       reader.readAsDataURL(file);
       const formData = new FormData();
       formData.append("file", file);
-      const message = await UploadImage(formData);
-      console.log(message);
+      formData.append("userId", userId.toString());
+      await UploadImage(formData);
     }
   }
-
-  console.log(imgUrl);
 
   return (
     <div className="relative cursor-pointer w-[250px] h-[250px] group shrink-0">

@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 
@@ -49,7 +50,14 @@ export default function FormInput({
         !textarea && !width && "lg:w-1/2"
       } flex flex-col gap-y-1 relative`}
     >
-      <label htmlFor={name}>{label}</label>
+      <div className="flex items-center justify-between">
+        <label htmlFor={name}>{label}</label>
+        {placeholder === "your login password" && (
+          <Link href="/forgot" className="text-blue hover:underline">
+            Forgot password
+          </Link>
+        )}
+      </div>
       {textarea ? (
         <textarea
           name={name}
