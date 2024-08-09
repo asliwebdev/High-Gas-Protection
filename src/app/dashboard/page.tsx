@@ -1,4 +1,5 @@
-import { roboto } from "@/lib/fonts";
+import { Battery } from "@/components/Battery";
+import { livvic, roboto, sen } from "@/lib/fonts";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -13,10 +14,6 @@ const statistics = [
   {
     title: "TITLE 2",
     value: 1236,
-  },
-  {
-    title: "TITLE 3",
-    value: 1237,
   },
 ];
 
@@ -46,12 +43,15 @@ const emergencies = [
 export default function Dashboard() {
   return (
     <main className="h-full flex items-center justify-center py-5">
-      <div>
+      <div className="flex flex-col justify-between h-full gap-y-10">
         <Statistics />
-        <h1 className="text-6xl mt-16">Welcome To The Dashboard! </h1>
-        <p className="text-2xl mt-6">
-          To Be able to access to this page you have to be authenticated!!!
-        </p>
+        <div className="px-6">
+          <div className="bg-[#3a3a3a] rounded-lg py-7 px-[29px] flex justify-between gap-2 flex-wrap">
+           <Temperature />
+           <GasPressure />
+           <Battery />
+          </div>   
+        </div>           
         <Emergencies />
       </div>
     </main>
@@ -97,4 +97,22 @@ function Emergencies() {
       })}
     </ul>
   );
+}
+
+function Temperature() {
+  return <div className="bg-[#323232] rounded-xl p-8 flex justify-center self-start">
+   <div>
+    <p className="text-xs font-[300] my-[13px]">Tue | Dec 15</p>
+    <h3 className={`font-bold text-[42px] leading-[50px] ${sen.className}`}>25º C</h3>
+   </div>
+  </div>
+}
+
+function GasPressure() {
+  return <div className="bg-[#323232] rounded-xl p-8 flex justify-center self-start">
+   <div>
+   <h5 className={`text-lg ${livvic.className} font-semibold text-center mb-3`}>Battery Power</h5>
+    <div className={`radial-progress ${roboto.className} font-bold text-2xl`} style={{ "--value": "30", "--size": "12rem", "--thickness": "2rem" } as React.CSSProperties} role="progressbar">70</div>
+   </div>
+  </div>
 }

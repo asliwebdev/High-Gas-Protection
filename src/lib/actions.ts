@@ -172,6 +172,7 @@ export async function updateProfile(formData: FormData) {
   const userData = await getUserProfile();
   const token = cookies().get("hgpToken")?.value;
   const data = {
+    id: userData.id,
     email: formData.get("email"),
     phone: formData.get("phone"),
     address: formData.get("address"),
@@ -182,9 +183,10 @@ export async function updateProfile(formData: FormData) {
   }
 
   try {
-    const response = await fetch(`${baseUrl}/api/edit/${userData.id}`, {
-      method: "PUT",
+    const response = await fetch(`${baseUrl}/api/edit`, {
+      method: "POST",
       headers: {
+        "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify(data),
@@ -204,12 +206,16 @@ export async function updateProfile(formData: FormData) {
 
 export async function updatePassword(formData: FormData) {
   const data = {
-    email: formData.get("email"),
     newPass: formData.get("newPass"),
+    email: formData.get("email"),
   };
+
   try {
     const response = await fetch(`${baseUrl}/api/reset-pass`, {
       method: "POST",
+      headers: {
+      "Content-Type": "application/json",
+      },
       body: JSON.stringify(data),
     });
 

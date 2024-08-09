@@ -23,7 +23,7 @@ export default function ClientDashboardLayout({
       <Sidebar isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
       <div className="flex-1 p-4 flex flex-col gap-7">
         <Header toggleSidebar={toggleSidebar} />
-        <div className="border-t border-borderColor pt-10">{children}</div>
+        <div className="border-t border-borderColor pt-10 h-full">{children}</div>
       </div>
     </main>
   );
