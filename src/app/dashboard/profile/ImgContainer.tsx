@@ -21,9 +21,6 @@ export default function ImgContainer({
       const imageUrl = await fetchProfileImage(imgUrl);
       if (imageUrl) {
         setProfileImage(imageUrl);
-        console.log("imageUrl", imageUrl);
-        localStorage.setItem("profileImage", imageUrl);
-        window.dispatchEvent(new Event("profileImageUpdated"));
       }
     }
     if (imgUrl) {

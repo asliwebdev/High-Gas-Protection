@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { SlMenu } from "react-icons/sl";
 
 export default function Header({
@@ -11,24 +11,6 @@ export default function Header({
   toggleSidebar: () => void;
 }) {
   const [isActive, setIsActive] = useState(false);
-  const [profileImage, setProfileImage] = useState<string>(
-    localStorage.getItem("profileImage") || "/profile_img.webp"
-  );
-
-  useEffect(() => {
-    function updateProfileImage() {
-      const newImageUrl = localStorage.getItem("profileImage");
-      if (newImageUrl) {
-        setProfileImage(newImageUrl);
-      }
-    }
-
-    window.addEventListener("profileImageUpdated", updateProfileImage);
-
-    return () => {
-      window.removeEventListener("profileImageUpdated", updateProfileImage);
-    };
-  }, []);
 
   return (
     <header className="flex items-center justify-between header-shadow">
@@ -58,7 +40,7 @@ export default function Header({
         </button>
         <Link href="/dashboard/profile">
           <Image
-            src={profileImage}
+            src="/profile_img.webp"
             alt="avatar image"
             width={35}
             height={35}
