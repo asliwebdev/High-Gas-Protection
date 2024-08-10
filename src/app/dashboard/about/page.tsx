@@ -33,6 +33,11 @@ export default function About() {
         egestas. Non diam at ornare felis sed. Arcu leo nec nec aliquet
         malesuada facilisis.
       </p>
+        <div className="relative w-full h-[370px] mt-20 max-w-[750px]">
+          <Image src="/placeholder.png" alt="placeholder image" width={301} height={193} className="absolute left-0 top-0 z-10" />
+          <Image src="/placeholder.png" alt="placeholder image" width={301} height={193} className="absolute left-1/2 top-1/2 z-20 -translate-x-1/2 -translate-y-1/2" />
+          <Image src="/placeholder.png" alt="placeholder image" width={301} height={193} className="absolute right-0 top-0 z-30" />
+        </div>
       <ul className="mt-10 grid sm:grid-cols-2 gap-4 lg:gap-x-[60px] gap-y-4">
         {teamMembers.map((member, index) => (
           <li

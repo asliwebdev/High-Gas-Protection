@@ -20,14 +20,14 @@ export function SubmitButton({
       }`}
     >
       {cancel && (
-        <Link href="/" aria-disabled={pending} className="bg-[#ff4c4c] btn">
+        <Link href="/" aria-disabled={pending} className="bg-[#ff4c4c] custom-btn">
           Cancel
         </Link>
       )}
       <button
         type="submit"
         aria-disabled={pending}
-        className={`bg-blue btn ${pending && "opacity-75 transition-none"}`}
+        className={`bg-blue custom-btn ${pending && "opacity-75 transition-none"}`}
       >
         {pending ? "submitting..." : text}
       </button>

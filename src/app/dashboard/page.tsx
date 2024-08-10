@@ -45,8 +45,8 @@ export default function Dashboard() {
     <main className="h-full flex items-center justify-center py-5">
       <div className="flex flex-col justify-between h-full gap-y-10">
         <Statistics />
-        <div className="px-6">
-          <div className="bg-[#3a3a3a] rounded-lg py-7 px-[29px] flex justify-between gap-2 flex-wrap">
+        <div className="sm:px-6">
+          <div className="bg-[#3a3a3a] rounded-lg py-7 sm:px-[29px] flex justify-center lg:justify-between gap-2 gap-y-8 flex-wrap">
            <Temperature />
            <GasPressure />
            <Battery />
@@ -60,16 +60,17 @@ export default function Dashboard() {
 
 function Statistics() {
   return (
-    <section className="mt-6">
+    <section className="mt-6 flex justify-center">
+      <div>
       <h5 className="font-medium text-lg">Statistics</h5>
       <ul
-        className={`mt-2 py-1.5 flex justify-between gap-4 flex-wrap ${roboto.className}`}
+        className={`mt-2 py-1.5 flex justify-center gap-10 flex-wrap ${roboto.className}`}
       >
         {statistics.map((stat, index) => {
           return (
             <li
               key={index}
-              className="bg-[rgba(255,255,255,0.3)] rounded-xl py-[5px] px-10 flex flex-1 flex-col items-center"
+              className="bg-[rgba(255,255,255,0.3)] rounded-xl py-[5px] px-20 flex flex-col items-center"
             >
               <p className="mb-4">{stat.title}</p>
               <span className="text-[rgba(166,166,166,1)]">{stat.value}</span>
@@ -77,6 +78,7 @@ function Statistics() {
           );
         })}
       </ul>
+      </div>
     </section>
   );
 }

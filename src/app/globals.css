@@ -75,54 +75,23 @@ body {
 }
 
 @layer components {
-  .btn {
+  .custom-btn {
     @apply rounded-md font-medium py-2 px-14 hover:opacity-85 transition-all duration-300 max-sm:w-full text-center;
   }
 }
 
 .radial-progress {
-  position: relative;
-  display: inline-grid;
-  height: var(--size);
-  width: var(--size);
-  place-content: center;
-  border-radius: 9999px;
-  background-color: transparent;
-  vertical-align: middle;
-  box-sizing: content-box;
-  --value: 70;
-  --size: 5rem;
-  --thickness: calc(var(--size) / 10);
   --primary-color: #77eb28;
   --secondary-color: #474747;
 }
 
-.radial-progress:before,
-.radial-progress:after {
-  position: absolute;
-  border-radius: 9999px;
-  content: "";
-}
-
 .radial-progress:before {
-  inset: 0px;
-  background: radial-gradient(farthest-side, var(--secondary-color) 99%, #0000) top/var(--thickness) var(--thickness) no-repeat,
-    conic-gradient(var(--primary-color) calc(var(--value) * 1%), var(--secondary-color) 0);
-  -webkit-mask: radial-gradient(
-    farthest-side,
-    #0000 calc(99% - var(--thickness)),
-    #000 calc(100% - var(--thickness))
-  );
-  mask: radial-gradient(
-    farthest-side,
-    #0000 calc(99% - var(--thickness)),
-    #000 calc(100% - var(--thickness))
-  );
+  background: radial-gradient(farthest-side, var(--primary-color) 98%, #0000) top/var(--thickness) var(--thickness)
+    no-repeat,
+  conic-gradient(var(--primary-color) calc(var(--value) * 1%), var(--secondary-color) 0);
 }
 
 .radial-progress:after {
-  inset: calc(50% - var(--thickness) / 2);
-  transform: rotate(calc(var(--value) * 3.6deg - 90deg)) translate(calc(var(--size) / 2 - 50%));
   background-color: var(--primary-color);
 }
 

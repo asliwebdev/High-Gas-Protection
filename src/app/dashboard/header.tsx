@@ -1,9 +1,9 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import { SlMenu } from "react-icons/sl";
+import { IoPersonCircleOutline } from "react-icons/io5";
 
 export default function Header({
   toggleSidebar,
@@ -13,7 +13,7 @@ export default function Header({
   const [isActive, setIsActive] = useState(false);
 
   return (
-    <header className="flex items-center justify-between header-shadow">
+    <header className="flex items-center justify-between header-shadow lg:px-10">
       <button
         type="button"
         className={`w-16 h-8 border-2 rounded-full border-borderColor flex items-center transition-all duration-300  ${
@@ -39,13 +39,7 @@ export default function Header({
           <SlMenu />
         </button>
         <Link href="/dashboard/profile">
-          <Image
-            src="/profile_img.webp"
-            alt="avatar image"
-            width={35}
-            height={35}
-            className="rounded-full"
-          />
+          <IoPersonCircleOutline className="text-4xl" />
         </Link>
       </div>
     </header>

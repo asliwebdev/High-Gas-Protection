@@ -62,9 +62,6 @@ export default function Order() {
             width="w-full"
           />
         </div>
-        {/* <p aria-live="polite" role="status" className="text-danger">
-          {state?.message}
-        </p> */}
         <SubmitButton text="Order" cancel />
         <p className="mt-6 text-center">
           No account yet?{" "}
