@@ -1,21 +1,10 @@
+"use client";
+
 import { Battery } from "@/components/Battery";
 import { livvic, roboto, sen } from "@/lib/fonts";
-import type { Metadata } from "next";
-
-export const metadata: Metadata = {
-  title: "Home",
-};
-
-const statistics = [
-  {
-    title: "TITLE 1",
-    value: 1235,
-  },
-  {
-    title: "TITLE 2",
-    value: 1236,
-  },
-];
+import SockJS from 'sockjs-client';
+import { Stomp } from '@stomp/stompjs';
+import { useEffect, useState } from "react";
 
 const emergencies = [
   {
@@ -41,15 +30,33 @@ const emergencies = [
 ];
 
 export default function Dashboard() {
+  const [data, setData] = useState<any>(null);
+  useEffect(() => {
+    var socket = new SockJS('https://amused-bison-equipped.ngrok-free.app/websocket-connection');
+    var stompClient = Stomp.over(socket);
+    stompClient.connect({}, function (frame: any) {
+        stompClient.subscribe("/topic/message", function (payload) {
+            if (payload.isBinaryBody) {
+                const binaryData = new TextDecoder().decode(payload.binaryBody);
+                const data = JSON.parse(binaryData);
+                setData(data);
+            } else {
+                console.log(payload.body);
+            }
+        });
+    });
+  }, []);
+  
+
   return (
     <main className="h-full flex items-center justify-center py-5">
       <div className="flex flex-col justify-between h-full gap-y-10">
-        <Statistics />
+        <Statistics data={data} />
         <div className="sm:px-6">
           <div className="bg-[#3a3a3a] rounded-lg py-7 sm:px-[29px] flex justify-center lg:justify-between gap-2 gap-y-8 flex-wrap">
-           <Temperature />
-           <GasPressure />
-           <Battery />
+           <Temperature temperature={data?.temperature} />
+           <GasPressure gasPressure={data?.gasPressure} />
+           <Battery battery={data?.battery} />
           </div>   
         </div>           
         <Emergencies />
@@ -58,25 +65,22 @@ export default function Dashboard() {
   );
 }
 
-function Statistics() {
+function Statistics({data}: {data: any}) {
   return (
     <section className="mt-6 flex justify-center">
       <div>
       <h5 className="font-medium text-lg">Statistics</h5>
       <ul
-        className={`mt-2 py-1.5 flex justify-center gap-10 flex-wrap ${roboto.className}`}
+        className={`mt-2 py-1.5 flex justify-center gap-10 flex-wrap font-extrabold`}
       >
-        {statistics.map((stat, index) => {
-          return (
-            <li
-              key={index}
-              className="bg-[rgba(255,255,255,0.3)] rounded-xl py-[5px] px-20 flex flex-col items-center"
-            >
-              <p className="mb-4">{stat.title}</p>
-              <span className="text-[rgba(166,166,166,1)]">{stat.value}</span>
-            </li>
-          );
-        })}
+        <li className="bg-[rgba(255,255,255,0.3)] rounded-xl py-[5px] px-20 flex flex-col items-center">
+            <p className="mb-4 text-xl opacity-80">Air Humidity</p>
+            <span className="text-xl">{data?.airHumidity}</span>
+        </li>
+        <li className="bg-[rgba(255,255,255,0.3)] rounded-xl py-[5px] px-20 flex flex-col items-center">
+            <p className="mb-4 text-xl opacity-80">Price</p>
+            <span className="text-xl">{data?.price}</span>
+        </li>
       </ul>
       </div>
     </section>
@@ -101,20 +105,31 @@ function Emergencies() {
   );
 }
 
-function Temperature() {
+function Temperature({temperature}: {temperature: number}) {
   return <div className="bg-[#323232] rounded-xl p-8 flex justify-center self-start">
    <div>
     <p className="text-xs font-[300] my-[13px]">Tue | Dec 15</p>
-    <h3 className={`font-bold text-[42px] leading-[50px] ${sen.className}`}>25º C</h3>
+    <h3 className={`font-bold text-[42px] leading-[50px] ${sen.className}`}>{temperature}º C</h3>
    </div>
   </div>
 }
 
-function GasPressure() {
+function GasPressure({gasPressure}: {gasPressure: number}) {
+  const status = () => {
+    if (0 < gasPressure && gasPressure <= 40) {
+      return "success";
+    } else if (40 < gasPressure && gasPressure <= 60) {
+      return "warning";
+    } else if(60 < gasPressure && gasPressure <= 75) {
+      return "darkWarning";
+    } else if (75 < gasPressure && gasPressure <= 100) {
+      return "danger";
+  }
+}
   return <div className="bg-[#323232] rounded-xl p-8 flex justify-center self-start">
    <div>
-   <h5 className={`text-lg ${livvic.className} font-semibold text-center mb-3`}>Battery Power</h5>
-    <div className={`radial-progress ${roboto.className} font-bold text-2xl`} style={{ "--value": "30", "--size": "12rem", "--thickness": "2rem" } as React.CSSProperties} role="progressbar">70</div>
+   <h5 className={`text-lg font-semibold text-center mb-3`}>Gas Pressure</h5>
+    <div className={`radial-progress ${roboto.className} font-bold text-2xl`} data-value={gasPressure || 0} data-status={status()} style={{ "--value": gasPressure, "--size": "12rem", "--thickness": "2rem" } as React.CSSProperties} role="progressbar">{gasPressure || 0}</div>
    </div>
   </div>
 }

@@ -94,4 +94,16 @@ body {
 .radial-progress:after {
   background-color: var(--primary-color);
 }
+.radial-progress[data-value='0'] {
+  --primary-color: #474747;
+}
+.radial-progress[data-status='warning'] {
+  --primary-color: #FFF455;
+}
+.radial-progress[data-status='darkWarning'] {
+  --primary-color: #ffcc00;
+}
+.radial-progress[data-status='danger'] {
+  --primary-color: #ff0000;
+}
 
