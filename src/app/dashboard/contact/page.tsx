@@ -45,13 +45,12 @@ function ContactInfo() {
       </div>
       <address className="mt-8">
         <Link
-          href="https://maps.app.goo.gl/6PSjzLobCdXTFZQW6"
+          href="https://maps.app.goo.gl/h8NMc91Sdwncnt6Z6"
           className="flex gap-4 sm:gap-8 text-lg sm:text-2xl hover:underline"
           target="_blank"
         >
           <FaLocationDot />
-          132 Dartmouth Street Boston, <br />
-          Massachusetts 02156 United States
+          Tashkent 100084, Amir Temur avenue 108
         </Link>
       </address>
     </div>
