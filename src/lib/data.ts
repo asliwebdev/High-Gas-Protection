@@ -1,8 +1,7 @@
 "use server";
 
 import { cookies } from "next/headers";
-
-const baseUrl = "https://amused-bison-equipped.ngrok-free.app";
+import { baseUrl } from "./utils";
 
 export async function getUserProfile() {
   const token = cookies().get("hgpToken")?.value;

@@ -31,7 +31,7 @@ export default function FormInput({
 
   const inputProps: { [key: string]: any } = {
     className:
-      "block w-full py-[9px] placeholder:text-[rgba(201,201,201,1)] bg-transparent border-b outline-none",
+      "block w-full py-[9px] placeholder:text-[rgba(201,201,201,1)] bg-transparent border-b outline-none sm:text-lg",
     type: showPassword && type === "password" ? "text" : type,
     name,
     id: name,
@@ -51,7 +51,7 @@ export default function FormInput({
       } flex flex-col gap-y-1 relative`}
     >
       <div className="flex items-center justify-between">
-        <label htmlFor={name}>{label}</label>
+        <label htmlFor={name} className="font-medium sm:text-lg">{label}</label>
         {placeholder === "your login password" && (
           <Link href="/forgot" className="text-blue hover:underline">
             Forgot password

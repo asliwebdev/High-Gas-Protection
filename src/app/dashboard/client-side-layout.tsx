@@ -7,8 +7,10 @@ import Header from "./header";
 
 export default function ClientDashboardLayout({
   children,
+  accessStatus,
 }: Readonly<{
   children: React.ReactNode;
+  accessStatus: any;
 }>) {
   const [isSidebarOpen, setSidebarOpen] = useState(false);
 
@@ -22,7 +24,7 @@ export default function ClientDashboardLayout({
     >
       <Sidebar isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
       <div className="flex-1 p-4 flex flex-col gap-7">
-        <Header toggleSidebar={toggleSidebar} />
+        <Header toggleSidebar={toggleSidebar} accessStatus={accessStatus} />
         <div className="border-t border-borderColor pt-10 h-full">{children}</div>
       </div>
     </main>

@@ -3,8 +3,7 @@
 import { cookies } from "next/headers";
 import { getUserProfile } from "./data";
 import { revalidateTag } from "next/cache";
-
-const baseUrl = "https://amused-bison-equipped.ngrok-free.app";
+import { baseUrl } from "./utils";
 
 export async function registerUser(formData: FormData) {
   const data = {
@@ -85,10 +84,21 @@ export async function login(formData: FormData) {
     }
     const responseData = await response.json();
 
+    if(responseData.role) {
+      return { error: "You are not allowed to login!" };
+    }
+
     const cookieStore = cookies();
     cookieStore.set({
       name: "hgpToken",
       value: responseData?.token,
+      path: "/",
+      httpOnly: true,
+      sameSite: "strict",
+    });
+    cookieStore.set({
+      name: "hgpAccessStatus",
+      value: responseData?.accessStatus,
       path: "/",
       httpOnly: true,
       sameSite: "strict",

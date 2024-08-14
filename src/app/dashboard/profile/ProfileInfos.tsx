@@ -5,18 +5,7 @@ import ImgContainer from "./ImgContainer";
 import { updateProfile } from "@/lib/actions";
 import { toast } from "sonner";
 import { SubmitButton } from "@/components/SubmitButton";
-
-type UserType = {
-  id: number;
-  firstname: string;
-  lastname: string;
-  email: string;
-  address: string;
-  passportSerialNumber: string;
-  phone: string;
-  gender: "MALE" | "FEMALE";
-  imageUrl: string;
-};
+import { UserType } from "@/types";
 
 export default function ProfileInfos({
   profileData: initialProfileData,
@@ -47,7 +36,7 @@ export default function ProfileInfos({
   }
 
   return (
-    <section className="w-full flex flex-col gap-8 items-center lg:flex-row justify-center lg:items-start lg:gap-10 xl:gap-20 pb-12">
+    <section className="w-full flex flex-col gap-8 items-center lg:flex-row justify-center lg:items-start lg:gap-10 xl:gap-14 pb-12 px-20">
       <div className="p-6 rounded-2xl w-full flex-[2] bg-[#252525] flex flex-col items-center justify-center">
         <ImgContainer
           imgUrl={initialProfileData.imageUrl}

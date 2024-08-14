@@ -1,10 +1,11 @@
 "use client";
 
 import { Battery } from "@/components/Battery";
-import { livvic, roboto, sen } from "@/lib/fonts";
+import { roboto, sen } from "@/lib/fonts";
 import SockJS from 'sockjs-client';
 import { Stomp } from '@stomp/stompjs';
 import { useEffect, useState } from "react";
+import { baseUrl } from "@/lib/utils";
 
 const emergencies = [
   {
@@ -32,7 +33,7 @@ const emergencies = [
 export default function Dashboard() {
   const [data, setData] = useState<any>(null);
   useEffect(() => {
-    var socket = new SockJS('https://amused-bison-equipped.ngrok-free.app/websocket-connection');
+    var socket = new SockJS(`${baseUrl}/websocket-connection`);
     var stompClient = Stomp.over(socket);
     stompClient.connect({}, function (frame: any) {
         stompClient.subscribe("/topic/message", function (payload) {

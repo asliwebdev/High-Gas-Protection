@@ -20,7 +20,7 @@ export default function ContactForm() {
   }
 
   return (
-    <form ref={formRef} action={clientAction} className="max-w-[900px] mt-16">
+    <form ref={formRef} action={clientAction} className="max-w-[900px] w-full mt-16 bg-[#2D2D2D] p-6 sm:p-10 rounded-lg">
       <div className="flex flex-col gap-y-5 w-full">
         <FormInput
           type="text"

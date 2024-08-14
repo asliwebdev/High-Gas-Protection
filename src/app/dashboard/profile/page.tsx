@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 export default async function Profile() {
   const profileData = await getUserProfile();
   return (
-    <main className="h-full flex items-center justify-center">
+    <main className="h-full flex justify-center">
       <ProfileInfos profileData={profileData} />
     </main>
   );
